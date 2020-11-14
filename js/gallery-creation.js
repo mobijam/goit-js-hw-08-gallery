@@ -1,23 +1,22 @@
 import galleryItems from './gallery-items.js';
 
-console.log(galleryItems);
-
 const galleryContainer = document.querySelector('.js-gallery');
 
 const imagesMarkup = createGalleryElementsMarkup(galleryItems);
 
-galleryContainer.insertAdjacentHTML('beforeend', imagesMarkup);
+galleryContainer.innerHTML = imagesMarkup;
 
-function createGalleryElementsMarkup(galleryItems) {
-    return galleryItems.map(({preview, original, description}) => {
+function createGalleryElementsMarkup(gallery) {
+    return gallery.map(({preview, original, description}) => {
         return `
         <li class="gallery__item">
         <a class="gallery__link"
             href="${original}">
         <img
-            class="gallery__image"
+            loading="lazy"
+            class="gallery__image lazyload"
             src="${preview}"
-            data-source="${original}"
+            data-src="${original}"
             alt="${description}"/>
         </a>
         </li>`;
